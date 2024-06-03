@@ -162,7 +162,7 @@ public class DBGroup {
         try {
             URL url = new URL(Constants.leaveAllGroups);
             String postdata = String.format("id=%d", Utils.loggedInUser.getId());
-            DBGeneral.sendHttpPostRequest(url, postdata);
+            new DBGeneral.PostTask().execute(url, postdata);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -176,7 +176,7 @@ public class DBGroup {
         try {
             URL url = new URL(Constants.editGroup);
             String postdata = String.format("id=%d&name=%s&description=%s", group.getId(), group.getName(),group.getDescription());
-            DBGeneral.sendHttpPostRequest(url, postdata);
+            new DBGeneral.PostTask().execute(url, postdata);
         }catch (IOException e){
             e.printStackTrace();
         }

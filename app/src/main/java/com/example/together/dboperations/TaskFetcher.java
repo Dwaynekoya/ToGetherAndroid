@@ -1,5 +1,9 @@
 package com.example.together.dboperations;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.ArrayAdapter;
+
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
 import com.google.gson.Gson;
@@ -9,84 +13,74 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class TaskFetcher extends Thread {
     private final int userId;
-    private List<Task> taskList;
-    private List<Habit> habitList;
+    private final ArrayAdapter<Object> adapter;
+    private final Handler handler;
 
-    /**
-     * Constructor
-     * @param userId from the current user
-     * @param taskList from the tasklist view controller, observablelist
-     * @param habitList from the tasklist view controller, observablelist
-     */
-    public TaskFetcher(int userId, List<Task> taskList, List<Habit> habitList) {
+    public TaskFetcher(int userId, ArrayAdapter<Object> adapter) {
         this.userId = userId;
-        this.taskList = taskList;
-        this.habitList = habitList;
+        this.adapter = adapter;
+        this.handler = new Handler(Looper.getMainLooper());
     }
 
     @Override
     public void run() {
-       while (true){
-           fetchTasks();
-           try {
-               Thread.sleep(1000);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-       }
+        while (true) {
+            fetchTasks();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    /**
-     * Takes tasks and habits from database, converts the json data to Java objects and stores them in the lists provided
-     */
     private void fetchTasks() {
         String json = DBTask.getTasks(userId, false);
 
-        if (json==null) return;
+        if (json == null) return;
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class, new SQLDateAdapter()) //adapts mysql dates
-                .registerTypeAdapter(boolean.class, new BooleanTypeAdapter()) //adapts mysql booleans (0,1) to java ones
+                .registerTypeAdapter(Date.class, new SQLDateAdapter())
                 .create();
-//        System.out.println(json);
-        JsonObject jsonObject = JsonParser.parseString(json.toString()).getAsJsonObject();
+
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
 
         List<Task> fetchedTasks = gson.fromJson(jsonObject.getAsJsonArray("tasks"), new TypeToken<List<Task>>() {}.getType());
         List<Habit> fetchedHabits = gson.fromJson(jsonObject.getAsJsonArray("habits"), new TypeToken<List<Habit>>() {}.getType());
 
-        //Manually checking which tasks are habits, so they can be shown in the habits list and not in the tasks
         Map<Integer, Habit> habitMap = new HashMap<>();
         for (Habit habit : fetchedHabits) {
             habitMap.put(habit.getId(), habit);
         }
+
         Iterator<Task> taskIterator = fetchedTasks.iterator();
         while (taskIterator.hasNext()) {
             Task task = taskIterator.next();
-//            System.out.println(task.getName() + "  " + task.isFinished());
             if (habitMap.containsKey(task.getId())) {
                 Habit habit = habitMap.get(task.getId());
-                //System.out.println("Matching Task and Habit ID: " + task.getId());
-
-                // Update habit with matching task attributes
                 habit.setName(task.getName());
                 habit.setDate(task.getDate());
                 habit.setInfo(task.getInfo());
                 habit.setFinished(task.isFinished());
-
                 taskIterator.remove();
             }
         }
 
-            if (!taskList.equals(fetchedTasks)) {
-                taskList = fetchedTasks;
-            }
+        List<Object> combinedList = new ArrayList<>();
+        combinedList.addAll(fetchedTasks);
+        combinedList.addAll(fetchedHabits);
 
-            if (!habitList.equals(fetchedHabits)) {
-                habitList = fetchedHabits;
-            }
+        handler.post(() -> {
+            adapter.clear();
+            adapter.addAll(combinedList);
+        });
     }
 }

@@ -1,6 +1,10 @@
 package com.example.together;
 
 
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.widget.EditText;
+
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Task;
@@ -97,18 +101,20 @@ public class Utils {
     }*/ //todo: image chooser
 
     /**
-     * Makes it so a spinner can only take integer values
-     * @param spinner to set the new format to
+     * Makes it so a editText can only take integer values
+     * @param editText to set the new format to
      */
-    /*public static void integerSpinner(Spinner spinner) {
-        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365, 1);
-        spinner.setValueFactory(valueFactory);
-
-        spinner.setEditable(true);
-        spinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                spinner.getEditor().setText(newValue.replaceAll("[^\\d]", ""));
+    public static void integerSpinner(EditText editText) {
+        editText.setFilters(new InputFilter[]{new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    if (!Character.isDigit(source.charAt(i))) {
+                        return "";
+                    }
+                }
+                return null;
             }
-        });
-    }*/ //TODO: integer spinner
+        }});
+    }
 }
