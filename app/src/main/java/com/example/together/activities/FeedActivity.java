@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.together.R;
+import com.example.together.Utils;
 import com.example.together.dboperations.DBTask;
 import com.example.together.model.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +27,9 @@ public class FeedActivity extends AppCompatActivity {
 
         fetchFollowingTasks();
         populateScrollViewWithTasks();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        Utils.setUpBottomMenu(bottomNavigationView, this);
     }
 
     private void fetchFollowingTasks() {

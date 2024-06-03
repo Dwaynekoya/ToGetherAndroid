@@ -20,9 +20,9 @@
         android:icon="@drawable/ic_launcher_foreground"
         android:title="Groups" />
     <item
-        android:id="@+id/settingsButton"
+        android:id="@+id/profileButton"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Settings" />
+        android:title="Profile" />
 
 </menu>

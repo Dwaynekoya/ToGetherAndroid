@@ -1,9 +1,14 @@
 package com.example.together.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Group {
+public class Group implements Parcelable {
     private int id;
     private String name;
     private String description;
@@ -12,22 +17,6 @@ public class Group {
     private Set<Habit> sharedHabits;
     private User manager;
 
-    /**
-     *
-     * @param id ->  unique ID, used to join groups
-     * @param name -> Short name to identify group
-     * @param description -> Added by users to define the group
-     * @param members -> All users that have access to group
-     * @param sharedTasks -> if there are no tasks, pass empty set. Tasks shared between users
-     */
-    /*public Group(int id, String name, String description, Set<User> members, Set<Task> sharedTasks, User manager) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.members = members;
-        this.sharedTasks = sharedTasks;
-        this.manager=manager;
-    }*/
 
     /**
      * Constructor used when creating a new group
@@ -119,5 +108,51 @@ public class Group {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    // Parcelable implementation
+    protected Group(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        // Read lists from Parcel
+        ArrayList<User> membersList = in.readArrayList(User.class.getClassLoader());
+        ArrayList<Task> sharedTasksList = in.readArrayList(Task.class.getClassLoader());
+        ArrayList<Habit> sharedHabitsList = in.readArrayList(Habit.class.getClassLoader());
+
+        // Convert lists to sets
+        members = new HashSet<>(membersList);
+        sharedTasks = new HashSet<>(sharedTasksList);
+        sharedHabits = new HashSet<>(sharedHabitsList);
+        manager = in.readParcelable(User.class.getClassLoader());
+    }
+
+    public static final Creator<Group> CREATOR = new Creator<Group>() {
+        @Override
+        public Group createFromParcel(Parcel in) {
+            return new Group(in);
+        }
+
+        @Override
+        public Group[] newArray(int size) {
+            return new Group[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeList(new ArrayList<>(members));
+        dest.writeList(new ArrayList<>(sharedTasks));
+        dest.writeList(new ArrayList<>(sharedHabits));
+        dest.writeParcelable(manager, flags);
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

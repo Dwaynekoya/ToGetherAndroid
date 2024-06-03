@@ -15,20 +15,20 @@ import com.example.together.dboperations.DBTask;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class NewTaskActivity extends Activity {
+public class EditTaskActivity extends Activity {
 
     private EditText editTextText, editTextDate, editTextTextMultiLine, daysText;
     private CheckBox checkBox;
-    private Button buttonCreate, buttonCancel;
+    private Button buttonSave, buttonCancel;
     private LinearLayout habitBox;
     private TextView textViewRequiredFields;
 
-    private String taskName, date, info;
-    private boolean isHabit = false;
+    private Task task;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Override
@@ -40,7 +40,7 @@ public class NewTaskActivity extends Activity {
         editTextDate = findViewById(R.id.editTextDate);
         editTextTextMultiLine = findViewById(R.id.editTextTextMultiLine);
         checkBox = findViewById(R.id.checkBox);
-        buttonCreate = findViewById(R.id.button8);
+        buttonSave = findViewById(R.id.button8);
         buttonCancel = findViewById(R.id.button9);
         habitBox = findViewById(R.id.habitBox);
         daysText = findViewById(R.id.daysText);
@@ -48,18 +48,34 @@ public class NewTaskActivity extends Activity {
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> habitBox.setVisibility(isChecked ? View.VISIBLE : View.GONE));
 
-        buttonCreate.setOnClickListener(v -> createTask());
-        buttonCancel.setOnClickListener(v -> cancelTask());
+        buttonSave.setOnClickListener(v -> saveTask());
+        buttonCancel.setOnClickListener(v -> cancelEdit());
+
+        // Retrieve the task data from intent extras
+        task = getIntent().getParcelableExtra("task");
+
+        if (task != null) {
+            editTextText.setText(task.getName());
+            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+            if (task.getDate() != null) {
+                editTextDate.setText(dateFormat.format(task.getDate()));
+            }
+            editTextTextMultiLine.setText(task.getInfo());
+            checkBox.setChecked(task instanceof Habit);
+            if (task instanceof Habit) {
+                daysText.setText(String.valueOf(((Habit) task).getRepetition()));
+            }
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         Utils.setUpBottomMenu(bottomNavigationView, this);
     }
 
-    private void createTask() {
-        taskName = editTextText.getText().toString();
-        date = editTextDate.getText().toString();
-        info = editTextTextMultiLine.getText().toString();
-        isHabit = checkBox.isChecked();
+    private void saveTask() {
+        String taskName = editTextText.getText().toString();
+        String date = editTextDate.getText().toString();
+        String info = editTextTextMultiLine.getText().toString();
+        boolean isHabit = checkBox.isChecked();
 
         if (taskName.isEmpty()) {
             textViewRequiredFields.setVisibility(View.VISIBLE);
@@ -79,21 +95,29 @@ public class NewTaskActivity extends Activity {
             e.printStackTrace();
         }
 
-        Task newTask = new Task(0, taskName, sqlDate, info, false, "");
+        task.setName(taskName);
+        task.setDate(sqlDate);
+        task.setInfo(info);
+
         if (isHabit) {
             int repeatInterval = Integer.parseInt(daysText.getText().toString());
-            Habit newHabit = new Habit(newTask, repeatInterval);
-            DBTask.addTask(newHabit);
-        } else {
-            DBTask.addTask(newTask);
+            if (task instanceof Habit) {
+                ((Habit) task).setRepetition(repeatInterval);
+            } else {
+                Habit newHabit = new Habit(task, repeatInterval);
+                task = newHabit;
+            }
         }
 
-        // goes back to previous view
+
+        DBTask.updateTask(task);
+
+        // Go back to the previous activity
         finish();
     }
 
-    private void cancelTask() {
-        // goes back to previous view
+    private void cancelEdit() {
+        // Go back to the previous activity
         finish();
     }
 }

@@ -10,6 +10,7 @@ import com.example.together.Utils;
 import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBTask;
 import com.example.together.view.ViewSwitcher;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -28,6 +29,9 @@ public class SettingsActivity extends AppCompatActivity {
         buttonLogout.setOnClickListener(this::logOut);
         buttonDeleteAllTasks.setOnClickListener(this::deleteAllTasks);
         buttonLeaveAllGroups.setOnClickListener(this::leaveAllGroups);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        Utils.setUpBottomMenu(bottomNavigationView, this);
     }
 
     /**

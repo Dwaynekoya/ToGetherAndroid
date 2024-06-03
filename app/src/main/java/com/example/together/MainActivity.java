@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.together.dboperations.DBUsers;
+import com.example.together.view.ViewSwitcher;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button loginButton, signupButton;
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void launchApp(int loginID) {
-        //TODO: launch new activity with the main app logic
+        Utils.loggedInUser = DBUsers.getUser(loginID);
+        ViewSwitcher.switchView(this, ViewSwitcher.View.FEED);
     }
 
     private void takeInputData() {

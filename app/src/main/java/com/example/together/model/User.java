@@ -1,10 +1,14 @@
 package com.example.together.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class User {
+public class User implements Parcelable {
     private int id;
     private String username;
     private String password;
@@ -105,5 +109,50 @@ public class User {
     public int hashCode() {
         return Objects.hash(id);
     }
+    // Parcelable implementation
+    protected User(Parcel in) {
+        id = in.readInt();
+        username = in.readString();
+        password = in.readString();
+        bio = in.readString();
+        icon = in.readString();
+        following = new HashSet<>();
+        in.readList(new ArrayList<>(following), User.class.getClassLoader());
+        followers = new HashSet<>();
+        in.readList(new ArrayList<>(followers), User.class.getClassLoader());
+        tasks = new HashSet<>();
+        in.readList(new ArrayList<>(tasks), Task.class.getClassLoader());
+        groups = new HashSet<>();
+        in.readList(new ArrayList<>(groups), Group.class.getClassLoader());
+    }
 
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(username);
+        dest.writeString(password);
+        dest.writeString(bio);
+        dest.writeString(icon);
+        dest.writeList(new ArrayList<>(following));
+        dest.writeList(new ArrayList<>(followers));
+        dest.writeList(new ArrayList<>(tasks));
+        dest.writeList(new ArrayList<>(groups));
+    }
 }

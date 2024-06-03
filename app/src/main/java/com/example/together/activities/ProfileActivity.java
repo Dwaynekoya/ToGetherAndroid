@@ -16,6 +16,7 @@ import com.example.together.R;
 import com.example.together.Utils;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.model.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -62,6 +63,9 @@ public class ProfileActivity extends Activity {
                 editBio();
             }
         });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        Utils.setUpBottomMenu(bottomNavigationView, this);
     }
 
     private void initUserData() {

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.example.together.MainActivity;
-import com.example.together.R;
 import com.example.together.activities.FeedActivity;
+import com.example.together.activities.NewTaskActivity;
+import com.example.together.activities.ProfileActivity;
+import com.example.together.activities.SettingsActivity;
+import com.example.together.activities.TasklistActivity;
 
 public class ViewSwitcher {
 
@@ -16,11 +19,23 @@ public class ViewSwitcher {
                 intent = new Intent(activity, MainActivity.class);
                 break;
             case TASKLIST:
-                //intent = new Intent(activity, TaskListActivity.class);
+                intent = new Intent(activity, TasklistActivity.class);
                 break;
-            // Add other cases as needed
             case FEED:
                 intent = new Intent(activity, FeedActivity.class);
+                break;
+            case NEWTASK:
+                intent = new Intent(activity, NewTaskActivity.class);
+                break;
+            case GROUPS:
+                //TODO: put groups view
+                intent = new Intent(activity, TasklistActivity.class);
+                break;
+            case PROFILE:
+                intent = new Intent(activity, ProfileActivity.class);
+                break;
+            case SETTINGS:
+                intent = new Intent(activity, SettingsActivity.class);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown view: " + view);
@@ -35,7 +50,9 @@ public class ViewSwitcher {
         SETTINGS,
         PROFILE,
         TASK,
-        FEED
+        FEED,
+        NEWTASK,
+        GROUPS
         // TODO: add all views
     }
 }

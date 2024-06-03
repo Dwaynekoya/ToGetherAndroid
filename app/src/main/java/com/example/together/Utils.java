@@ -1,6 +1,7 @@
 package com.example.together;
 
 
+import android.app.Activity;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.EditText;
@@ -9,6 +10,8 @@ import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Task;
 import com.example.together.model.User;
+import com.example.together.view.ViewSwitcher;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -116,5 +119,28 @@ public class Utils {
                 return null;
             }
         }});
+    }
+
+    public static void setUpBottomMenu(BottomNavigationView bottomNavigationView, Activity activity) {
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.homeButton) {
+                ViewSwitcher.switchView(activity, ViewSwitcher.View.FEED);
+                return true;
+            } else if (itemId == R.id.listButton) {
+                ViewSwitcher.switchView(activity, ViewSwitcher.View.TASKLIST);
+                return true;
+            } else if (itemId == R.id.newButton) {
+                ViewSwitcher.switchView(activity, ViewSwitcher.View.NEWTASK);
+                return true;
+            } else if (itemId == R.id.groupsButton) {
+                // TODO: Groups view
+                return true;
+            } else if (itemId == R.id.profileButton) {
+                ViewSwitcher.switchView(activity, ViewSwitcher.View.PROFILE);
+                return true;
+            }
+            return false;
+        });
     }
 }
