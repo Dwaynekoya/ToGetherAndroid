@@ -6,6 +6,7 @@ import com.example.together.model.Task;
 
 import java.io.*;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 
 public class DBTask {
@@ -33,7 +34,7 @@ public class DBTask {
             if (task instanceof Habit) postData.append("&repeat=").append(((Habit) task).getRepetition());
             //postData.append("&repeat=").append(repeat != null ? repeat : "null"); // Include repeat field
 
-            DBGeneral.sendHttpPostRequest(url,postData.toString());
+            String response = new DBGeneral.PostTask().execute(url, postData.toString()).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,7 +59,7 @@ public class DBTask {
             } /*else {
                 postData.append("&repeat=").append("");
             }*/
-            DBGeneral.sendHttpPostRequest(url,postData.toString());
+            String response = new DBGeneral.PostTask().execute(url, postData).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +75,7 @@ public class DBTask {
         try {
             URL url = new URL(Constants.deleteTask);
             String postData = "id=" + id;
-            String response = DBGeneral.sendHttpPostRequest(url,postData);
+            String response = new DBGeneral.PostTask().execute(url, postData).get();
             System.out.println("Response when deleting: " + response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,10 +89,10 @@ public class DBTask {
     public static void finishTask(Task task){
         try {
             URL url = new URL(Constants.finishTask);
-            String queryString = String.format("task_id=%d&image=%s&finished=%s", task.getId(), task.getImage(), true);
-            String response = DBGeneral.sendHttpPostRequest(url, queryString);
+            String postdata = String.format("task_id=%d&image=%s&finished=%s", task.getId(), task.getImage(), true);
+            String response = new DBGeneral.PostTask().execute(url, postdata).get();
             System.out.printf("Response when finishing task with id $d: $s $n", task.getId(), response);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -105,7 +106,7 @@ public class DBTask {
     public static String getTasks(int userId, boolean following) {
         try {
             URL url = new URL(Constants.getTasksFromUser + "?id=" + userId + "&following=" + following);
-            return  DBGeneral.sendHttpGetRequest(url);
+            return  new DBGeneral.GetTask().execute(url).get();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -119,8 +120,8 @@ public class DBTask {
         try {
             URL url = new URL(Constants.deleteAllTasks);
             String postdata = String.format("id=%d", Utils.loggedInUser.getId());
-            DBGeneral.sendHttpPostRequest(url,postdata);
-        }catch (IOException e) {
+            String response = new DBGeneral.PostTask().execute(url, postdata).get();
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
