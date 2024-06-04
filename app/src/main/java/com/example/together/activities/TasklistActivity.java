@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.together.R;
 import com.example.together.Utils;
@@ -36,14 +38,12 @@ public class TasklistActivity extends AppCompatActivity {
         TaskFetcher taskFetcher = new TaskFetcher(Utils.loggedInUser.getId(), adapter);
         taskFetcher.start();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the clicked task
-                Task clickedTask = (Task) adapter.getItem(position);
-
-                launchEditTaskActivity(clickedTask);
-            }
+        //TODO: on item click not being triggered?
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            // Get the clicked task
+            Task clickedTask = (Task) adapter.getItem(position);
+            Toast.makeText(this.getApplicationContext(), "CLICKED", Toast.LENGTH_LONG);
+            launchEditTaskActivity(clickedTask);
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);

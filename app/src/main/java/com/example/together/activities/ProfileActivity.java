@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 
 import com.example.together.R;
@@ -84,6 +86,7 @@ public class ProfileActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE);
+        //TODO: upload photo and set as profile pic url
     }
 
     @Override
@@ -111,6 +114,8 @@ public class ProfileActivity extends Activity {
         String newBio = editTextBio.getText().toString();
         Utils.loggedInUser.setBio(newBio);
         DBUsers.editBio(newBio);
+
+        Toast.makeText(this.getApplicationContext(), "Changed your bio!", Toast.LENGTH_SHORT);
     }
     //TODO: buttons that open friend list and group list
     //TODO: button that opens search

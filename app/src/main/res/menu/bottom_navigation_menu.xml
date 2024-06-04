@@ -1,28 +1,34 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeButton"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Home" />
+        android:title="Home"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/listButton"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="List" />
+        android:title="List"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/newButton"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="New" />
+        android:title="New"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/groupsButton"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Groups" />
+        android:title="Groups"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/profileButton"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Profile" />
+        android:title="Profile"
+        app:showAsAction="always"/>
 
 </menu>
