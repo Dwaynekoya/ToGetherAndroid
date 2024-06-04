@@ -33,7 +33,7 @@ public class TasklistActivity extends AppCompatActivity {
         adapter = new TaskHabitAdapter(this, new ArrayList<>());
         listView.setAdapter(adapter);
 
-        TaskFetcher taskFetcher = new TaskFetcher(1, adapter);
+        TaskFetcher taskFetcher = new TaskFetcher(Utils.loggedInUser.getId(), adapter);
         taskFetcher.start();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

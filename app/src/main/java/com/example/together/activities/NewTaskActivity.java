@@ -44,7 +44,7 @@ public class NewTaskActivity extends Activity {
         buttonCancel = findViewById(R.id.button9);
         habitBox = findViewById(R.id.habitBox);
         daysText = findViewById(R.id.daysText);
-        //TODO: textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
+        TODO: textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> habitBox.setVisibility(isChecked ? View.VISIBLE : View.GONE));
 

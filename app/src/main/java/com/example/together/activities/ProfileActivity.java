@@ -16,6 +16,7 @@ import com.example.together.R;
 import com.example.together.Utils;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.model.User;
+import com.example.together.view.ViewSwitcher;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.FileNotFoundException;
@@ -27,10 +28,7 @@ public class ProfileActivity extends Activity {
     private TextView usernameLabel;
     private EditText editTextBio;
     private Button buttonChangeProfilePicture;
-    private Button buttonEditBio;
-    private Button buttonMyGroups;
-    private Button buttonMyFriends;
-    private Button buttonSearchMore;
+    private Button buttonEditBio, buttonMyGroups, buttonMyFriends, buttonSearchMore, buttonSettings;
 
     private static final int PICK_IMAGE = 1;
 
@@ -47,6 +45,7 @@ public class ProfileActivity extends Activity {
         buttonMyGroups = findViewById(R.id.buttonMyGroups);
         buttonMyFriends = findViewById(R.id.buttonMyFriends);
         buttonSearchMore = findViewById(R.id.buttonSearchMore);
+        buttonSettings = findViewById(R.id.settingsButton);
 
         initUserData();
 
@@ -61,6 +60,12 @@ public class ProfileActivity extends Activity {
             @Override
             public void onClick(View v) {
                 editBio();
+            }
+        });
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewSwitcher.switchView(ProfileActivity.this, ViewSwitcher.View.SETTINGS);
             }
         });
 

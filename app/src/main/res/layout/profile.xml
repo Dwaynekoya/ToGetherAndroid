@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/profileInfoBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,14 +28,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="20dp">
 
                 <TextView
                     android:id="@+id/usernameLabel"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USERNAME" />
+                    android:text="USERNAME"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <Button
                     android:id="@+id/buttonChangeProfilePicture"
@@ -52,7 +59,9 @@
             android:id="@+id/textViewBio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bio" />
+            android:layout_marginTop="20dp"
+            android:text="Bio"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
             android:id="@+id/editTextBio"
@@ -62,28 +71,49 @@
             android:gravity="start|top"
             android:inputType="textMultiLine" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@id/profileInfoBox"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <Button
             android:id="@+id/buttonEditBio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
             android:text="Edit Bio" />
 
         <Button
             android:id="@+id/buttonMyGroups"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:text="My Groups" />
 
         <Button
             android:id="@+id/buttonMyFriends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:text="My Friends" />
 
         <Button
             android:id="@+id/buttonSearchMore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:text="Search for more..." />
     </LinearLayout>
 
@@ -93,6 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
-        app:menu="@menu/bottom_navigation_menu"
-        />
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemRippleColor="@null"
+        app:menu="@menu/bottom_navigation_menu" />
 </RelativeLayout>

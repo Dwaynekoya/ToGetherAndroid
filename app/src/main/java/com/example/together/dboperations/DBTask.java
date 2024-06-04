@@ -59,7 +59,7 @@ public class DBTask {
             } /*else {
                 postData.append("&repeat=").append("");
             }*/
-            String response = new DBGeneral.PostTask().execute(url, postData).get();
+            String response = new DBGeneral.PostTask().execute(url, postData.toString()).get();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -49,6 +49,7 @@ public class TaskFetcher extends Thread {
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Date.class, new SQLDateAdapter())
+                .registerTypeAdapter(boolean.class, new BooleanTypeAdapter())
                 .create();
 
         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();

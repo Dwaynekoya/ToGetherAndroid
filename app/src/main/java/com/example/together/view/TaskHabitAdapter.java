@@ -40,11 +40,12 @@ public class TaskHabitAdapter extends ArrayAdapter<Object> {
             checkBox.setChecked(task.isFinished());
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 task.setFinished(isChecked);
-                DBTask.updateTask(task);
+                task.setImage("http://localhost/ToGether/phpusers/uploads/placeholder.png");
+                DBTask.finishTask(task);
             });
             deleteButton.setOnClickListener(v -> {
-                remove(task);
                 DBTask.deleteTask(task);
+                remove(task);
             });
         } else if (item instanceof Habit) {
             Habit habit = (Habit) item;
@@ -55,8 +56,8 @@ public class TaskHabitAdapter extends ArrayAdapter<Object> {
                 DBTask.updateTask(habit);
             });
             deleteButton.setOnClickListener(v -> {
-                remove(habit);
                 DBTask.deleteTask(habit);
+                remove(habit);
             });
         }
 
