@@ -38,11 +38,9 @@ public class TasklistActivity extends AppCompatActivity {
         TaskFetcher taskFetcher = new TaskFetcher(Utils.loggedInUser.getId(), adapter);
         taskFetcher.start();
 
-        //TODO: on item click not being triggered?
+        //to be able to trigger this, focusable on button and checkbox must be off
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            // Get the clicked task
             Task clickedTask = (Task) adapter.getItem(position);
-            Toast.makeText(this.getApplicationContext(), "CLICKED", Toast.LENGTH_LONG);
             launchEditTaskActivity(clickedTask);
         });
 

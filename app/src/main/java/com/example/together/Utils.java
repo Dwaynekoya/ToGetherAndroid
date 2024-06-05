@@ -134,7 +134,7 @@ public class Utils {
                 ViewSwitcher.switchView(activity, ViewSwitcher.View.NEWTASK);
                 return true;
             } else if (itemId == R.id.groupsButton) {
-                // TODO: Groups view
+                ViewSwitcher.switchView(activity, ViewSwitcher.View.GROUPS);
                 return true;
             } else if (itemId == R.id.profileButton) {
                 ViewSwitcher.switchView(activity, ViewSwitcher.View.PROFILE);

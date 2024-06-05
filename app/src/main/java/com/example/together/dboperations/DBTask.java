@@ -1,5 +1,7 @@
 package com.example.together.dboperations;
 
+import android.widget.Toast;
+
 import com.example.together.Utils;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
@@ -20,7 +22,7 @@ public class DBTask {
             StringBuilder postData = new StringBuilder();
             postData.append("name=").append(task.getName());
             if (task.getDate() != null) postData.append("&date=").append(task.getDate());
-            if (task.getInfo() != null) postData.append("&info=").append(task.getInfo());
+            if (task.getInfo() != null && !task.getInfo().isEmpty()) postData.append("&info=").append(task.getInfo());
 
             //CHECK IF IT'S A GROUP TASK OR A USER TASK
             if (Utils.groupNewTask != null){

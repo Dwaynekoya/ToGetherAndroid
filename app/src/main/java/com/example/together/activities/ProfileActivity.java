@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.together.R;
 import com.example.together.Utils;
 import com.example.together.dboperations.DBUsers;
@@ -51,6 +52,13 @@ public class ProfileActivity extends Activity {
 
         initUserData();
 
+        buttonListeners();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        Utils.setUpBottomMenu(bottomNavigationView, this);
+    }
+
+    private void buttonListeners() {
         buttonChangeProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,16 +78,34 @@ public class ProfileActivity extends Activity {
                 ViewSwitcher.switchView(ProfileActivity.this, ViewSwitcher.View.SETTINGS);
             }
         });
+        buttonMyFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ListActivity.class);
+                intent.putExtra("listType", "users");
+                startActivity(intent);
+            }
+        });
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        Utils.setUpBottomMenu(bottomNavigationView, this);
+        buttonMyGroups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ListActivity.class);
+                intent.putExtra("listType", "groups");
+                startActivity(intent);
+            }
+        });
     }
 
     private void initUserData() {
         User loggedInUser = Utils.loggedInUser;
         usernameLabel.setText(loggedInUser.getUsername());
         editTextBio.setText(loggedInUser.getBio());
-        imageView.setImageBitmap(BitmapFactory.decodeFile(loggedInUser.getIcon()));
+
+        // image loader
+        Glide.with(this.getApplicationContext())
+                .load(loggedInUser.getIcon())
+                .into(imageView);
     }
 
     private void openImageChooser() {

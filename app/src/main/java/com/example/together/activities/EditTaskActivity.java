@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.together.R;
 import com.example.together.Utils;
@@ -36,20 +37,22 @@ public class EditTaskActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newtask);
 
-        editTextText = findViewById(R.id.editTextText);
+        editTextText = findViewById(R.id.edittextGroupName);
         editTextDate = findViewById(R.id.editTextDate);
-        editTextTextMultiLine = findViewById(R.id.editTextTextMultiLine);
+        editTextTextMultiLine = findViewById(R.id.editTextInfo);
         checkBox = findViewById(R.id.checkBox);
         buttonSave = findViewById(R.id.button8);
         buttonCancel = findViewById(R.id.button9);
         habitBox = findViewById(R.id.habitBox);
         daysText = findViewById(R.id.daysText);
-        //TODO: textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
+        textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> habitBox.setVisibility(isChecked ? View.VISIBLE : View.GONE));
 
+        buttonSave.setText("Edit");
         buttonSave.setOnClickListener(v -> saveTask());
         buttonCancel.setOnClickListener(v -> cancelEdit());
+        buttonCancel.setVisibility(View.GONE);
 
         // Retrieve the task data from intent extras
         task = getIntent().getParcelableExtra("task");
@@ -111,13 +114,13 @@ public class EditTaskActivity extends Activity {
 
 
         DBTask.updateTask(task);
-
+        Toast.makeText(this.getApplicationContext(), "Updated!", Toast.LENGTH_SHORT);
         // Go back to the previous activity
-        finish();
+        //finish();
     }
 
     private void cancelEdit() {
-        // Go back to the previous activity
-        finish();
+        // Go back to the previous activity ?
+        // finish();
     }
 }

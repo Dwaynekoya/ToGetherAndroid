@@ -30,6 +30,9 @@
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.TasklistActivity" />
         <activity android:name=".activities.GroupsActivity" />
+        <activity android:name=".activities.ListActivity"/>
+        <activity android:name=".activities.NewGroupActivity"/>
+        <activity android:name=".activities.SearchActivity"/>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

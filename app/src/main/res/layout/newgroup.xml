@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Task Name" />
+            android:text="Group Name" />
 
         <EditText
             android:id="@+id/edittextGroupName"
@@ -25,21 +25,6 @@
             android:ems="10"
             android:hint="Name"
             android:inputType="text" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Date" />
-
-        <EditText
-            android:id="@+id/editTextDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="YYYY-MM-DD"
-            android:inputType="date" />
 
         <TextView
             android:id="@+id/textView5"
@@ -56,12 +41,6 @@
             android:gravity="start|top"
             android:hint="Enter info here..."
             android:inputType="textMultiLine" />
-
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Is this a habit?" />
 
         <LinearLayout
             android:id="@+id/habitBox"
@@ -88,15 +67,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"></LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textViewRequiredFields"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="You should fill the name for the task \n(and repetition if it's a habit)"
-            android:textAlignment="center"
-            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.together.R;
 import com.example.together.Utils;
@@ -36,9 +37,9 @@ public class NewTaskActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newtask);
 
-        editTextText = findViewById(R.id.editTextText);
+        editTextText = findViewById(R.id.edittextGroupName);
         editTextDate = findViewById(R.id.editTextDate);
-        editTextTextMultiLine = findViewById(R.id.editTextTextMultiLine);
+        editTextTextMultiLine = findViewById(R.id.editTextInfo);
         checkBox = findViewById(R.id.checkBox);
         buttonCreate = findViewById(R.id.button8);
         buttonCancel = findViewById(R.id.button9);
@@ -88,12 +89,15 @@ public class NewTaskActivity extends Activity {
             DBTask.addTask(newTask);
         }
 
-        // goes back to previous view
-        finish();
+        Toast.makeText(this.getApplicationContext(), "Task created succesfully!", Toast.LENGTH_SHORT);
+        // goes back to previous view ?
+        // finish();
     }
 
     private void cancelTask() {
         // goes back to previous view
-        finish();
+        date = editTextDate.getText().toString();
+        Toast.makeText(this.getApplicationContext(), date,Toast.LENGTH_LONG);
+        // finish();
     }
 }
