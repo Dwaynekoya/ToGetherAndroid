@@ -134,20 +134,12 @@ public class ProfileActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
             if (data != null) {
                 try {
-                    InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                    Uri imageUri = data.getData();
+                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
                     Bitmap selectedImage = BitmapFactory.decodeStream(inputStream);
                     imageView.setImageBitmap(selectedImage);
 
-                    File photoFile = new File(getRealPathFromURI(data.getData()));
-                    if (photoFile.exists()) {
-                        if (Utils.loggedInUser != null) {
-                            // updates profile picture
-                            PhotoUploader photoUploader = new PhotoUploader(photoFile, Utils.loggedInUser);
-                            photoUploader.start();
-                        }
-                    } else {
-                        Toast.makeText(this, "Failed to retrieve photo file", Toast.LENGTH_SHORT).show();
-                    }
+                    new PhotoUploader(this, imageUri, Utils.loggedInUser).execute();
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
