@@ -40,7 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="USERNAME"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/darkBrown"/>
 
                 <Button
                     android:id="@+id/buttonChangeProfilePicture"
@@ -52,7 +53,8 @@
                     android:id="@+id/settingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings" />
+                    android:text="Settings"
+                    android:backgroundTint="@color/dark_button_colors"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -62,7 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Bio"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/darkBrown"/>
 
         <EditText
             android:id="@+id/editTextBio"
@@ -70,7 +73,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@color/darkBrown"/>
 
     </LinearLayout>
 
@@ -99,7 +103,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="My Groups" />
+            android:text="My Groups"
+            android:backgroundTint="@color/dark_button_colors"/>
 
         <Button
             android:id="@+id/buttonMyFriends"
@@ -107,7 +112,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="My Friends" />
+            android:text="My Friends"
+            android:backgroundTint="@color/dark_button_colors"/>
 
         <Button
             android:id="@+id/buttonSearchMore"
@@ -115,7 +121,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="Search for more..." />
+            android:text="Search for more..."
+            android:backgroundTint="@color/dark_button_colors"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
