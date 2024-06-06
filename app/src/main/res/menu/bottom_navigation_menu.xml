@@ -3,31 +3,31 @@
     <item
         android:id="@+id/homeButton"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/house_solid"
         android:title="Home"
         app:showAsAction="always"/>
     <item
         android:id="@+id/listButton"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/list_check_solid"
         android:title="List"
         app:showAsAction="always"/>
     <item
         android:id="@+id/newButton"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/plus_solid"
         android:title="New"
         app:showAsAction="always"/>
     <item
         android:id="@+id/groupsButton"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/users_solid"
         android:title="Groups"
         app:showAsAction="always"/>
     <item
         android:id="@+id/profileButton"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/user_solid"
         android:title="Profile"
         app:showAsAction="always"/>
 

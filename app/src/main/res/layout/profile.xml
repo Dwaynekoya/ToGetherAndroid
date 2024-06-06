@@ -127,5 +127,7 @@
         app:itemHorizontalTranslationEnabled="false"
         app:itemRippleColor="@null"
         app:menu="@menu/bottom_navigation_menu"
-        app:labelVisibilityMode="unlabeled"/>
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@color/lightest"
+        android:background="@color/mainOrange"/>
 </RelativeLayout>

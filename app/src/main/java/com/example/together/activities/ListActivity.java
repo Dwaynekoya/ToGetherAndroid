@@ -32,6 +32,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.tasklist);
 
         taskListView = findViewById(R.id.taskListView);
+        taskListView.setBackground(null);
 
         Intent intent = getIntent();
         String listType = intent.getStringExtra("listType");

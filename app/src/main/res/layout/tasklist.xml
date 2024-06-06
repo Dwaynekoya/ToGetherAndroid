@@ -24,5 +24,7 @@
         app:itemRippleColor="@null"
         app:itemHorizontalTranslationEnabled="false"
         app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@color/lightest"
+        android:background="@color/mainOrange"
         />
 </RelativeLayout>
