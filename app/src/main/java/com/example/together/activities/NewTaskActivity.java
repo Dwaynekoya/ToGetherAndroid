@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.together.R;
 import com.example.together.Utils;
 import com.example.together.dboperations.DBTask;
@@ -20,7 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class NewTaskActivity extends Activity {
+public class NewTaskActivity extends AppCompatActivity {
 
     private EditText editTextText, editTextDate, editTextTextMultiLine, daysText;
     private CheckBox checkBox;

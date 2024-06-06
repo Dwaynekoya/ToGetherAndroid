@@ -2,9 +2,12 @@ package com.example.together.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,19 +16,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.together.R;
 import com.example.together.Utils;
 import com.example.together.dboperations.DBUsers;
+import com.example.together.dboperations.PhotoUploader;
 import com.example.together.model.User;
 import com.example.together.view.ViewSwitcher;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class ProfileActivity extends Activity {
+public class ProfileActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView usernameLabel;
@@ -95,6 +101,12 @@ public class ProfileActivity extends Activity {
                 startActivity(intent);
             }
         });
+        buttonSearchMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewSwitcher.switchView(ProfileActivity.this, ViewSwitcher.View.SEARCH);
+            }
+        });
     }
 
     private void initUserData() {
@@ -126,14 +138,36 @@ public class ProfileActivity extends Activity {
                     Bitmap selectedImage = BitmapFactory.decodeStream(inputStream);
                     imageView.setImageBitmap(selectedImage);
 
-                    // TODO: Replace with DB set icon
-                    Utils.loggedInUser.setIcon(data.getData().toString());
+                    File photoFile = new File(getRealPathFromURI(data.getData()));
+                    if (photoFile.exists()) {
+                        if (Utils.loggedInUser != null) {
+                            // updates profile picture
+                            PhotoUploader photoUploader = new PhotoUploader(photoFile, Utils.loggedInUser);
+                            photoUploader.start();
+                        }
+                    } else {
+                        Toast.makeText(this, "Failed to retrieve photo file", Toast.LENGTH_SHORT).show();
+                    }
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    /**
+     * Utility method to get real path from URI
+     */
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor == null) return "";
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
     }
 
     private void editBio() {
@@ -143,7 +177,5 @@ public class ProfileActivity extends Activity {
 
         Toast.makeText(this.getApplicationContext(), "Changed your bio!", Toast.LENGTH_SHORT);
     }
-    //TODO: buttons that open friend list and group list
-    //TODO: button that opens search
 }
 

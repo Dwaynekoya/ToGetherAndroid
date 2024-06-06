@@ -9,6 +9,7 @@ import com.example.together.activities.GroupsActivity;
 import com.example.together.activities.NewGroupActivity;
 import com.example.together.activities.NewTaskActivity;
 import com.example.together.activities.ProfileActivity;
+import com.example.together.activities.SearchActivity;
 import com.example.together.activities.SettingsActivity;
 import com.example.together.activities.TasklistActivity;
 
@@ -41,6 +42,9 @@ public class ViewSwitcher {
             case NEWGROUP:
                 intent = new Intent(activity, NewGroupActivity.class);
                 break;
+            case SEARCH:
+                intent = new Intent(activity, SearchActivity.class);
+                break;
             default:
                 throw new IllegalArgumentException("Unknown view: " + view);
         }
@@ -53,11 +57,10 @@ public class ViewSwitcher {
         TASKLIST,
         SETTINGS,
         PROFILE,
-        TASK,
+        SEARCH,
         FEED,
         NEWTASK,
         GROUPS,
         NEWGROUP
-        // TODO: add all views
     }
 }

@@ -42,19 +42,6 @@ public class Utils {
         return true;
     }
 
-    /**
-     * Sets listeners for the buttons on the left side of most views
-     * @param settingsButton opens the settings menu
-     * @param groupButton shows the group view
-     * @param listButton shows the tasklist view
-     * @param homeButton shows the main feed
-     */
-    /*public static void sidebarSetup(Button settingsButton, Button groupButton, Button listButton, Button homeButton) {
-        settingsButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.SETTINGS));
-        groupButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.GROUPS));
-        listButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.TASKLIST));
-        homeButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.FEED));
-    }*/ //TODO: bottom nav bar
 
 
     /**
@@ -85,23 +72,6 @@ public class Utils {
         List<Task> fetchedTasks = gson.fromJson(jsonObject.getAsJsonArray("tasks"), new TypeToken<List<Task>>() {}.getType());
         return fetchedTasks;
     }
-    /**
-     * Opens a file chooser that can only pick image files
-     * @param event used to extract the current window
-     * @return chosen image file
-     */
-    /*public static File imageFileChooser(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Image File");
-
-        // File chooser can only pick image files
-        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
-                "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
-        fileChooser.getExtensionFilters().add(imageFilter);
-
-        Window currentWindow = ((ButtonBase) event.getSource()).getScene().getWindow();
-        return fileChooser.showOpenDialog(currentWindow);
-    }*/ //todo: image chooser
 
     /**
      * Makes it so a editText can only take integer values

@@ -33,7 +33,8 @@
         android:layout_marginBottom="0dp"
         app:menu="@menu/bottom_navigation_menu"
         app:itemRippleColor="@null"
-        app:itemHorizontalTranslationEnabled="false"/>
+        app:itemHorizontalTranslationEnabled="false"
+        app:labelVisibilityMode="unlabeled"/>
 
     <Button
         android:id="@+id/buttonNew"

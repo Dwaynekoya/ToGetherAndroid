@@ -125,5 +125,6 @@
         android:layout_marginBottom="0dp"
         app:itemHorizontalTranslationEnabled="false"
         app:itemRippleColor="@null"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        app:labelVisibilityMode="unlabeled"/>
 </RelativeLayout>
