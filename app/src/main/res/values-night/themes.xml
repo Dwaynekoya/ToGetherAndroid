@@ -3,5 +3,6 @@
     <style name="Base.Theme.ToGether" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="colorPrimary">@color/mainOrange</item>
+        <item name="android:windowBackground">@color/darkBrown</item>
     </style>
 </resources>

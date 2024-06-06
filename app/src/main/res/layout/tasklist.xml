@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
         android:layout_marginBottom="0dp"
-        android:padding="20dp" />
+        android:layout_margin="10dp"
+        android:background="@drawable/taskbox_background"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

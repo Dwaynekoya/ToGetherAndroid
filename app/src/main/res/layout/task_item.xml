@@ -28,18 +28,21 @@
             android:textStyle="bold"
             android:paddingBottom="10dp"
             android:text="User"
+            android:textColor="@color/lightCream"
             />
 
         <TextView
             android:id="@+id/task_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Task Name"/>
+            android:text="Task Name"
+            android:textColor="@color/lightCream"/>
 
         <TextView
             android:id="@+id/task_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Task Description"/>
+            android:text="Task Description"
+            android:textColor="@color/lightCream"/>
     </LinearLayout>
 </LinearLayout>

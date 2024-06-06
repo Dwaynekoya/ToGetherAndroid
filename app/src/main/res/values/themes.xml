@@ -3,6 +3,7 @@
     <style name="Base.Theme.ToGether" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/mainOrange</item>
+        <item name="android:windowBackground">@color/lightest</item>
     </style>
 
     <style name="Theme.ToGether" parent="Base.Theme.ToGether" />

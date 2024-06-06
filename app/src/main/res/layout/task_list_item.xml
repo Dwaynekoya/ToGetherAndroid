@@ -9,7 +9,8 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusable="false"/>
+        android:focusable="false"
+        android:textColor="@color/lightCream"/>
 
     <TextView
         android:id="@+id/nameLabel"
@@ -17,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:paddingStart="8dp"
-        android:text="Task/Habit Name" />
+        android:text="Task/Habit Name"
+        android:textColor="@color/lightCream"/>
 
     <Button
         android:id="@+id/deleteButton"

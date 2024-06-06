@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Group Name"
         android:textSize="18sp"
+        android:textColor="@color/lightCream"
         android:textStyle="bold" />
 
     <ListView
