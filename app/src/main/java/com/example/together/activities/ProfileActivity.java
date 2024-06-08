@@ -124,7 +124,6 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE);
-        //TODO: upload photo and set as profile pic url
     }
 
     @Override

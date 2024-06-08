@@ -48,6 +48,7 @@ public class ListActivity extends AppCompatActivity {
             taskListView.setOnItemClickListener((parent, view, position, id) -> showGroup(groupSet, position));
         } else {
             userSet = fetchUsers();
+            removeLoggedInUser();
             List<String> userNames = new ArrayList<>();
             for (User user : userSet) {
                 userNames.add(user.getUsername());
@@ -59,6 +60,12 @@ public class ListActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         Utils.setUpBottomMenu(bottomNavigationView, this);
+    }
+
+    private void removeLoggedInUser() {
+        for (User user: userSet){
+            if (user.equals(Utils.loggedInUser)) userSet.remove(user);
+        }
     }
 
     private Set<Group> fetchGroups() {

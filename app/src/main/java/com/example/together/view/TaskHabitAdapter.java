@@ -1,6 +1,11 @@
 package com.example.together.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,4 +68,5 @@ public class TaskHabitAdapter extends ArrayAdapter<Object> {
 
         return convertView;
     }
+
 }

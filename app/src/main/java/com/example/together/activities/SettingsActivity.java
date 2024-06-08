@@ -5,14 +5,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.example.together.R;
 import com.example.together.Utils;
 import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBTask;
+import com.example.together.view.ConfirmationDialogFragment;
 import com.example.together.view.ViewSwitcher;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements ConfirmationDialogFragment.ConfirmationDialogListener {
 
     private Button buttonLogout, buttonDeleteAllTasks, buttonLeaveAllGroups;
     private int action; // 1 means DELETE TASKS, 2 means LEAVE GROUPS
@@ -50,7 +53,7 @@ public class SettingsActivity extends AppCompatActivity {
      */
     public void deleteAllTasks(View view) {
         action = 1;
-        confirmAction();
+        showConfirmationDialog();
     }
 
     /**
@@ -59,14 +62,21 @@ public class SettingsActivity extends AppCompatActivity {
      */
     public void leaveAllGroups(View view) {
         action = 2;
-        confirmAction();
+        showConfirmationDialog();
     }
 
     /**
-     * Confirms current operation/action
+     * Shows a dialog fragment to confirm action
      */
-    private void confirmAction() {
-        //TODO: show popup?
+
+    private void showConfirmationDialog() {
+        DialogFragment dialog = new ConfirmationDialogFragment(this);
+        dialog.show(getSupportFragmentManager(), "ConfirmationDialogFragment");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // positive button on popup
         switch (action) {
             case 1:
                 DBTask.deleteAllTasks();
@@ -81,5 +91,10 @@ public class SettingsActivity extends AppCompatActivity {
                 break;
         }
         action = 0;
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        Toast.makeText(this, "Cancelled action", Toast.LENGTH_SHORT).show();
     }
 }

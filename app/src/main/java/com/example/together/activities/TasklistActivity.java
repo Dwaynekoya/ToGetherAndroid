@@ -32,7 +32,7 @@ public class TasklistActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.taskListView);
 
-        adapter = new TaskHabitAdapter(this, new ArrayList<>());
+        adapter = new TaskHabitAdapter(this, new ArrayList<>()); //TODO: finish task photo uploading
         listView.setAdapter(adapter);
 
         TaskFetcher taskFetcher = new TaskFetcher(Utils.loggedInUser.getId(), adapter);
