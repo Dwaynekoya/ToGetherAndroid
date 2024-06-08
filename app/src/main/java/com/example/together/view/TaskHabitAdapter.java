@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.together.R;
+import com.example.together.activities.TasklistActivity;
 import com.example.together.dboperations.DBTask;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
@@ -22,9 +23,12 @@ import com.example.together.model.Task;
 import java.util.List;
 
 public class TaskHabitAdapter extends ArrayAdapter<Object> {
+    public static final int PICK_IMAGE = 1;
+    private Context context;
 
     public TaskHabitAdapter(Context context, List<Object> objects) {
         super(context, 0, objects);
+        this.context = context;
     }
 
     @Override
@@ -44,10 +48,9 @@ public class TaskHabitAdapter extends ArrayAdapter<Object> {
             nameLabel.setText(task.getName());
             checkBox.setChecked(task.isFinished());
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                task.setFinished(isChecked);
-                task.setImage("http://localhost/ToGether/phpusers/uploads/placeholder.png");
-                DBTask.finishTask(task);
+                finishPhoto(task);
             });
+
             deleteButton.setOnClickListener(v -> {
                 DBTask.deleteTask(task);
                 remove(task);
@@ -57,8 +60,7 @@ public class TaskHabitAdapter extends ArrayAdapter<Object> {
             nameLabel.setText(habit.getName());
             checkBox.setChecked(habit.isFinished());
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                habit.setFinished(isChecked);
-                DBTask.updateTask(habit);
+                finishPhoto(habit);
             });
             deleteButton.setOnClickListener(v -> {
                 DBTask.deleteTask(habit);
@@ -67,6 +69,17 @@ public class TaskHabitAdapter extends ArrayAdapter<Object> {
         }
 
         return convertView;
+    }
+
+    private void finishPhoto(Task task) {
+        TasklistActivity.taskToFinish = task;
+        task.setFinished(true);
+        //task.setImage("http://localhost/ToGether/phpusers/uploads/placeholder.png");
+
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*"); // filter only images
+        ((Activity) context).startActivityForResult(intent, PICK_IMAGE);
+        DBTask.finishTask(task);
     }
 
 }

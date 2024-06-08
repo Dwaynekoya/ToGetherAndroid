@@ -27,7 +27,7 @@ public class NewTaskActivity extends AppCompatActivity {
 
     private EditText editTextText, editTextDate, editTextTextMultiLine, daysText;
     private CheckBox checkBox;
-    private Button buttonCreate, buttonCancel;
+    private Button buttonCreate;
     private LinearLayout habitBox;
     private TextView textViewRequiredFields;
 
@@ -45,7 +45,6 @@ public class NewTaskActivity extends AppCompatActivity {
         editTextTextMultiLine = findViewById(R.id.editTextInfo);
         checkBox = findViewById(R.id.checkBox);
         buttonCreate = findViewById(R.id.button8);
-        buttonCancel = findViewById(R.id.button9);
         habitBox = findViewById(R.id.habitBox);
         daysText = findViewById(R.id.daysText);
         textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
@@ -55,7 +54,6 @@ public class NewTaskActivity extends AppCompatActivity {
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> habitBox.setVisibility(isChecked ? View.VISIBLE : View.GONE));
 
         buttonCreate.setOnClickListener(v -> createTask());
-        buttonCancel.setOnClickListener(v -> cancelTask());
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         Utils.setUpBottomMenu(bottomNavigationView, this);
@@ -96,12 +94,5 @@ public class NewTaskActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this.getApplicationContext(), "Task created succesfully!", Toast.LENGTH_SHORT);
-    }
-
-    private void cancelTask() {
-        // goes back to previous view
-        date = editTextDate.getText().toString();
-        Toast.makeText(this.getApplicationContext(), date,Toast.LENGTH_LONG);
-        // finish();
     }
 }

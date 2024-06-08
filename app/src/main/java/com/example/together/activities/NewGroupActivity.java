@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class NewGroupActivity extends AppCompatActivity {
 
     private EditText edittextGroupName, editTextInfo;
-    private Button buttonCreate, buttonCancel;
+    private Button buttonCreate;
     private BottomNavigationView bottomNavigation;
 
     @Override
@@ -29,7 +29,6 @@ public class NewGroupActivity extends AppCompatActivity {
         edittextGroupName = findViewById(R.id.edittextGroupName);
         editTextInfo = findViewById(R.id.editTextInfo);
         buttonCreate = findViewById(R.id.button8);
-        buttonCancel = findViewById(R.id.button9);
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         buttonCreate.setOnClickListener(new View.OnClickListener() {
@@ -38,14 +37,6 @@ public class NewGroupActivity extends AppCompatActivity {
                 createGroup();
             }
         });
-
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancel();
-            }
-        });
-
         Utils.setUpBottomMenu(bottomNavigation, this);
     }
 
@@ -59,12 +50,7 @@ public class NewGroupActivity extends AppCompatActivity {
             Group newGroup = new Group(groupName, description);
             DBGroup.createGroup(newGroup);
             Toast.makeText(this, "Group created successfully", Toast.LENGTH_SHORT).show();
-            //finish();
         }
-    }
-
-    private void cancel() {
-        //finish();
     }
 
 }

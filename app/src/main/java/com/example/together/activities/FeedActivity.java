@@ -75,7 +75,7 @@ public class FeedActivity extends AppCompatActivity {
             TextView nameLabel = taskView.findViewById(R.id.task_name);
             TextView descriptionLabel = taskView.findViewById(R.id.task_description);
 
-            // TODO: change image urls in db
+            System.out.println(task.getImage());
             // image loader
             Glide.with(context)
                     .load(task.getImage())
