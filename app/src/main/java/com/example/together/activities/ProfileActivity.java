@@ -164,7 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void editBio() {
         String newBio = editTextBio.getText().toString();
         Utils.loggedInUser.setBio(newBio);
-        DBUsers.editBio(newBio);
+        DBUsers.editUser("bio", newBio);
 
         Toast.makeText(this.getApplicationContext(), "Changed your bio!", Toast.LENGTH_SHORT);
     }

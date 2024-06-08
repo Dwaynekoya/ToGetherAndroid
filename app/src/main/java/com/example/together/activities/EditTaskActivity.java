@@ -1,7 +1,7 @@
 package com.example.together.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,6 +17,7 @@ import com.example.together.Utils;
 import com.example.together.dboperations.DBTask;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
+import com.example.together.view.DateFilter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
@@ -56,9 +57,21 @@ public class EditTaskActivity extends AppCompatActivity {
         buttonCancel.setOnClickListener(v -> cancelEdit());
         buttonCancel.setVisibility(View.GONE);
 
-        // Retrieve the task data from intent extras
+        editTextDate.setFilters(new InputFilter[] { new DateFilter() });
+
         task = getIntent().getParcelableExtra("task");
 
+        if (task.getDate().toString().equals("1970-01-01")) {
+            task.setDate(null);
+        }
+
+        showDetails();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        Utils.setUpBottomMenu(bottomNavigationView, this);
+    }
+
+    private void showDetails() {
         if (task != null) {
             editTextText.setText(task.getName());
             SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -71,9 +84,6 @@ public class EditTaskActivity extends AppCompatActivity {
                 daysText.setText(String.valueOf(((Habit) task).getRepetition()));
             }
         }
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        Utils.setUpBottomMenu(bottomNavigationView, this);
     }
 
     private void saveTask() {
@@ -116,7 +126,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
 
         DBTask.updateTask(task);
-        Toast.makeText(this.getApplicationContext(), "Updated!", Toast.LENGTH_SHORT);
+        Toast.makeText(this.getApplicationContext(), "Updated!", Toast.LENGTH_SHORT).show();
         // Go back to the previous activity
         //finish();
     }

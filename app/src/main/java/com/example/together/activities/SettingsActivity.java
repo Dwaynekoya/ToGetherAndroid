@@ -3,6 +3,7 @@ package com.example.together.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -11,13 +12,16 @@ import com.example.together.R;
 import com.example.together.Utils;
 import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBTask;
+
+import com.example.together.dboperations.DBUsers;
 import com.example.together.view.ConfirmationDialogFragment;
 import com.example.together.view.ViewSwitcher;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SettingsActivity extends AppCompatActivity implements ConfirmationDialogFragment.ConfirmationDialogListener {
 
-    private Button buttonLogout, buttonDeleteAllTasks, buttonLeaveAllGroups;
+    private Button buttonLogout, buttonDeleteAllTasks, buttonLeaveAllGroups, buttonChangeUsername, buttonChangePassword;
+    private EditText editTextUsername, editTextPassword;
     private int action; // 1 means DELETE TASKS, 2 means LEAVE GROUPS
 
     @Override
@@ -28,10 +32,16 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmationD
         buttonLogout = findViewById(R.id.button);
         buttonDeleteAllTasks = findViewById(R.id.button2);
         buttonLeaveAllGroups = findViewById(R.id.button3);
+        buttonChangeUsername = findViewById(R.id.buttonChangeUsername);
+        buttonChangePassword = findViewById(R.id.buttonChangePassword);
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
 
         buttonLogout.setOnClickListener(this::logOut);
         buttonDeleteAllTasks.setOnClickListener(this::deleteAllTasks);
         buttonLeaveAllGroups.setOnClickListener(this::leaveAllGroups);
+        buttonChangeUsername.setOnClickListener(this::changeUsername);
+        buttonChangePassword.setOnClickListener(this::changePassword);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         Utils.setUpBottomMenu(bottomNavigationView, this);
@@ -68,9 +78,8 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmationD
     /**
      * Shows a dialog fragment to confirm action
      */
-
     private void showConfirmationDialog() {
-        DialogFragment dialog = new ConfirmationDialogFragment(this);
+        ConfirmationDialogFragment dialog = new ConfirmationDialogFragment(this);
         dialog.show(getSupportFragmentManager(), "ConfirmationDialogFragment");
     }
 
@@ -96,5 +105,28 @@ public class SettingsActivity extends AppCompatActivity implements ConfirmationD
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         Toast.makeText(this, "Cancelled action", Toast.LENGTH_SHORT).show();
+    }
+
+    public void changeUsername(View view) {
+        String newUsername = editTextUsername.getText().toString().trim();
+        if (!newUsername.isEmpty()) {
+            // Assuming DBUser.updateUsername() is a method to update the username in your database
+            DBUsers.editUser("username", newUsername);
+            Utils.loggedInUser.setUsername(newUsername);
+            Toast.makeText(this, "Username updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void changePassword(View view) {
+        String newPassword = editTextPassword.getText().toString().trim();
+        if (!newPassword.isEmpty()) {
+            // Assuming DBUser.updatePassword() is a method to update the password in your database
+            DBUsers.editUser("password", newPassword);
+            Toast.makeText(this, "Password updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+        }
     }
 }

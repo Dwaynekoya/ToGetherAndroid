@@ -16,6 +16,7 @@ import com.example.together.model.Task;
 import com.example.together.view.TaskHabitAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,12 @@ public class TasklistActivity extends AppCompatActivity {
     }
     private void launchEditTaskActivity(Task task) {
         Intent intent = new Intent(this, EditTaskActivity.class);
+        //can't pass a null date in intent, so we temporarily change it
+        System.out.println(task);
+        if (task.getDate()==null){
+            Date zeroDate = Date.valueOf("1970-01-01");
+            task.setDate(zeroDate);
+        }
         intent.putExtra("task", task);
         startActivity(intent);
     }

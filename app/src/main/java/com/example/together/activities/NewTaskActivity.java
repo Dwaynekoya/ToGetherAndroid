@@ -1,7 +1,7 @@
 package com.example.together.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,6 +17,7 @@ import com.example.together.Utils;
 import com.example.together.dboperations.DBTask;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
+import com.example.together.view.DateFilter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,7 +48,9 @@ public class NewTaskActivity extends AppCompatActivity {
         buttonCancel = findViewById(R.id.button9);
         habitBox = findViewById(R.id.habitBox);
         daysText = findViewById(R.id.daysText);
-        TODO: textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
+        textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
+
+        editTextDate.setFilters(new InputFilter[] { new DateFilter() });
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> habitBox.setVisibility(isChecked ? View.VISIBLE : View.GONE));
 
@@ -89,11 +92,10 @@ public class NewTaskActivity extends AppCompatActivity {
             DBTask.addTask(newHabit);
         } else {
             DBTask.addTask(newTask);
+
         }
 
         Toast.makeText(this.getApplicationContext(), "Task created succesfully!", Toast.LENGTH_SHORT);
-        // goes back to previous view ?
-        // finish();
     }
 
     private void cancelTask() {

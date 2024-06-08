@@ -5,6 +5,7 @@ import com.example.together.model.User;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.lang.reflect.Type;
@@ -117,12 +118,17 @@ public class DBUsers {
         }
     }
 
-    public static void editBio(String newBio) {
+    /**
+     * Updates user
+     * @param field name of the column to update
+     * @param value new value for the column for the current user
+     */
+    public static void editUser(String field, String value) {
         try {
-            URL url = new URL(Constants.updateUserBio);
-            String postData = String.format("user_id=%d&field=%s&new_field=%s", Utils.loggedInUser.getId(), "bio", newBio);
+            URL url = new URL(Constants.editUser);
+            String postData = String.format("id=%d&field=%s&value=%s", Utils.loggedInUser.getId(), field, value);
             new DBGeneral.PostTask().execute(url, postData);
-        } catch (Exception e) {
+        }catch (IOException e){
             e.printStackTrace();
         }
     }

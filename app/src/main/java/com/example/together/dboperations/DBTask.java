@@ -36,6 +36,8 @@ public class DBTask {
             if (task instanceof Habit) postData.append("&repeat=").append(((Habit) task).getRepetition());
             //postData.append("&repeat=").append(repeat != null ? repeat : "null"); // Include repeat field
 
+            System.out.println("DATE WHEN ADDING" + task.getDate());
+
             String response = new DBGeneral.PostTask().execute(url, postData.toString()).get();
         } catch (Exception e) {
             e.printStackTrace();
