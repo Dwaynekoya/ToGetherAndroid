@@ -1,6 +1,6 @@
 package com.example.together.dboperations;
 
-import com.example.together.Utils;
+import com.example.together.activities.Utils;
 import com.example.together.model.Group;
 import com.example.together.model.User;
 import com.google.gson.*;

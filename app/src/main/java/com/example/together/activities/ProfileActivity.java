@@ -1,6 +1,5 @@
 package com.example.together.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,14 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.dboperations.PhotoUploader;
 import com.example.together.model.User;
 import com.example.together.view.ViewSwitcher;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 

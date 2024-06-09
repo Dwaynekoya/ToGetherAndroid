@@ -10,11 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBTask;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.model.Task;

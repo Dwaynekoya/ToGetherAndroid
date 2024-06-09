@@ -5,22 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBGroup;
-import com.example.together.dboperations.DBTask;
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Habit;
@@ -39,7 +33,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

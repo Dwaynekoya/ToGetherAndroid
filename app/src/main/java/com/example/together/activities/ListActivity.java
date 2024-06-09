@@ -8,7 +8,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.model.Group;

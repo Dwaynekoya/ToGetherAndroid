@@ -1,4 +1,4 @@
-package com.example.together;
+package com.example.together.activities;
 
 
 import android.app.Activity;
@@ -6,6 +6,7 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.EditText;
 
+import com.example.together.R;
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Task;

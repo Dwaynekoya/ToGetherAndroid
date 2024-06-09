@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.together.activities.Utils;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.view.ViewSwitcher;
 

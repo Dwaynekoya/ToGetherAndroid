@@ -1,6 +1,5 @@
 package com.example.together.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBGroup;
 import com.example.together.model.Group;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,7 +26,7 @@ public class NewGroupActivity extends AppCompatActivity {
 
         edittextGroupName = findViewById(R.id.edittextGroupName);
         editTextInfo = findViewById(R.id.editTextInfo);
-        buttonCreate = findViewById(R.id.button8);
+        buttonCreate = findViewById(R.id.buttonSave);
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         buttonCreate.setOnClickListener(new View.OnClickListener() {

@@ -1,14 +1,10 @@
 package com.example.together.dboperations;
 
-import android.widget.Toast;
-
-import com.example.together.Utils;
+import com.example.together.activities.Utils;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
 
-import java.io.*;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 
 public class DBTask {

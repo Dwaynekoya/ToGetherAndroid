@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBTask;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
@@ -44,7 +43,7 @@ public class NewTaskActivity extends AppCompatActivity {
         editTextDate = findViewById(R.id.editTextDate);
         editTextTextMultiLine = findViewById(R.id.editTextInfo);
         checkBox = findViewById(R.id.checkBox);
-        buttonCreate = findViewById(R.id.button8);
+        buttonCreate = findViewById(R.id.buttonSave);
         habitBox = findViewById(R.id.habitBox);
         daysText = findViewById(R.id.daysText);
         textViewRequiredFields = findViewById(R.id.textViewRequiredFields);

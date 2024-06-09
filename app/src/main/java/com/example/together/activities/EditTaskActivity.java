@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBTask;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
@@ -28,7 +27,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
     private EditText editTextText, editTextDate, editTextTextMultiLine, daysText;
     private CheckBox checkBox;
-    private Button buttonSave, buttonCancel;
+    private Button buttonSave;
     private LinearLayout habitBox;
     private TextView textViewRequiredFields;
 
@@ -44,8 +43,7 @@ public class EditTaskActivity extends AppCompatActivity {
         editTextDate = findViewById(R.id.editTextDate);
         editTextTextMultiLine = findViewById(R.id.editTextInfo);
         checkBox = findViewById(R.id.checkBox);
-        buttonSave = findViewById(R.id.button8);
-        buttonCancel = findViewById(R.id.button9);
+        buttonSave = findViewById(R.id.buttonSave);
         habitBox = findViewById(R.id.habitBox);
         daysText = findViewById(R.id.daysText);
         textViewRequiredFields = findViewById(R.id.textViewRequiredFields);
@@ -54,8 +52,6 @@ public class EditTaskActivity extends AppCompatActivity {
 
         buttonSave.setText("Edit");
         buttonSave.setOnClickListener(v -> saveTask());
-        buttonCancel.setOnClickListener(v -> cancelEdit());
-        buttonCancel.setVisibility(View.GONE);
 
         editTextDate.setFilters(new InputFilter[] { new DateFilter() });
 

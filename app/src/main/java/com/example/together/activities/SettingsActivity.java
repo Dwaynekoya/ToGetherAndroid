@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.together.R;
-import com.example.together.Utils;
 import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBTask;
 
